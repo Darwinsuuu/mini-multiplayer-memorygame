@@ -1,58 +1,69 @@
 <div class="grid grid-cols-10 items-center gap-2 !w-fit">
 
-    <div class="box"
-        *ngFor="let box of boardValues">
-        <i class="fa-solid fa-bomb" *ngIf="box === 0"></i>
-        <i class="fa-solid fa-paint-roller" *ngIf="box === 1"></i>
-        <i class="fa-solid fa-star" *ngIf="box === 2"></i>
-        <i class="fa-solid fa-poo" *ngIf="box === 3"></i>
-        <i class="fa-solid fa-camera-retro" *ngIf="box === 4"></i>
-        <i class="fa-solid fa-hippo" *ngIf="box === 5"></i>
-        <i class="fa-solid fa-house" *ngIf="box === 6"></i>
-        <i class="fa-solid fa-key" *ngIf="box === 7"></i>
-        <i class="fa-solid fa-bath" *ngIf="box === 8"></i>
-        <i class="fa-solid fa-gears" *ngIf="box === 9"></i>
-        <i class="fa-solid fa-anchor" *ngIf="box === 10"></i>
-        <i class="fa-solid fa-landmark" *ngIf="box === 11"></i>
-        <i class="fa-solid fa-ambulance" *ngIf="box === 12"></i>
-        <i class="fa-solid fa-coffee" *ngIf="box === 13"></i>
-        <i class="fa-solid fa-book" *ngIf="box === 14"></i>
-        <i class="fa-solid fa-cube" *ngIf="box === 15"></i>
-        <i class="fa-solid fa-dragon" *ngIf="box === 16"></i>
-        <i class="fa-solid fa-music" *ngIf="box === 17"></i>
-        <i class="fa-solid fa-puzzle-piece" *ngIf="box === 18"></i>
-        <i class="fa-solid fa-sun" *ngIf="box === 19"></i>
-        <i class="fa-solid fa-umbrella" *ngIf="box === 20"></i>
-        <i class="fa-solid fa-moon" *ngIf="box === 21"></i>
-        <i class="fa-solid fa-futbol" *ngIf="box === 22"></i>
-        <i class="fa-solid fa-rocket" *ngIf="box === 23"></i>
-        <i class="fa-solid fa-tree" *ngIf="box === 24"></i>
-        <i class="fa-solid fa-globe" *ngIf="box === 25"></i>
-        <i class="fa-solid fa-car" *ngIf="box === 26"></i>
-        <i class="fa-solid fa-heart" *ngIf="box === 27"></i>
-        <i class="fa-solid fa-smile" *ngIf="box === 28"></i>
-        <i class="fa-solid fa-graduation-cap" *ngIf="box === 29"></i>
-        <i class="fa-solid fa-briefcase" *ngIf="box === 30"></i>
-        <i class="fa-solid fa-paper-plane" *ngIf="box === 31"></i>
-        <i class="fa-solid fa-tv" *ngIf="box === 32"></i>
-        <i class="fa-solid fa-clock" *ngIf="box === 33"></i>
-        <i class="fa-solid fa-cloud" *ngIf="box === 34"></i>
-        <i class="fa-solid fa-money-bill" *ngIf="box === 35"></i>
-        <i class="fa-solid fa-certificate" *ngIf="box === 36"></i>
-        <i class="fa-solid fa-cog" *ngIf="box === 37"></i>
-        <i class="fa-solid fa-trophy" *ngIf="box === 38"></i>
-        <i class="fa-solid fa-heartbeat" *ngIf="box === 39"></i>
-        <i class="fa-solid fa-magnet" *ngIf="box === 40"></i>
-        <i class="fa-solid fa-handshake" *ngIf="box === 41"></i>
-        <i class="fa-solid fa-puzzle-piece" *ngIf="box === 42"></i>
-        <i class="fa-solid fa-star-of-life" *ngIf="box === 43"></i>
-        <i class="fa-solid fa-dumbbell" *ngIf="box === 44"></i>
-        <i class="fa-solid fa-wrench" *ngIf="box === 45"></i>
-        <i class="fa-solid fa-rocket" *ngIf="box === 46"></i>
-        <i class="fa-solid fa-graduation-cap" *ngIf="box === 47"></i>
-        <i class="fa-solid fa-crown" *ngIf="box === 48"></i>
-        <i class="fa-solid fa-bullhorn" *ngIf="box === 49"></i>
-        <i class="fa-solid fa-guitar" *ngIf="box === 50"></i>
-    </div>
+    <!-- <div class="box" [ngClass]="{ 'box-closed': !boardValues[5].trigger }" (click)="openBox(5)">
+        <i class="fa-solid fa-hippo"></i>
+    </div> -->
 
+    <div class="box" [ngClass]="{ 'box-closed': !box.trigger }"
+        *ngFor="let box of boardValues; let i = index; trackBy: trackById" (click)="openBox(i)">
+        <i class="fa-solid fa-bomb" *ngIf="box.number === 0"></i>
+        <i class="fa-solid fa-paint-roller" *ngIf="box.number === 1"></i>
+        <i class="fa-solid fa-star" *ngIf="box.number === 2"></i>
+        <i class="fa-solid fa-poo" *ngIf="box.number === 3"></i>
+        <i class="fa-solid fa-camera-retro" *ngIf="box.number === 4"></i>
+        <i class="fa-solid fa-hippo" *ngIf="box.number === 5"></i>
+        <i class="fa-solid fa-house" *ngIf="box.number === 6"></i>
+        <i class="fa-solid fa-key" *ngIf="box.number === 7"></i>
+        <i class="fa-solid fa-bath" *ngIf="box.number === 8"></i>
+        <i class="fa-solid fa-gears" *ngIf="box.number === 9"></i>
+        <i class="fa-solid fa-anchor" *ngIf="box.number === 10"></i>
+        <i class="fa-solid fa-landmark" *ngIf="box.number === 11"></i>
+        <i class="fa-solid fa-ambulance" *ngIf="box.number === 12"></i>
+        <i class="fa-solid fa-coffee" *ngIf="box.number === 13"></i>
+        <i class="fa-solid fa-book" *ngIf="box.number === 14"></i>
+        <i class="fa-solid fa-cube" *ngIf="box.number === 15"></i>
+        <i class="fa-solid fa-dragon" *ngIf="box.number === 16"></i>
+        <i class="fa-solid fa-music" *ngIf="box.number === 17"></i>
+        <i class="fa-solid fa-puzzle-piece" *ngIf="box.number === 18"></i>
+        <i class="fa-solid fa-sun" *ngIf="box.number === 19"></i>
+        <i class="fa-solid fa-umbrella" *ngIf="box.number === 20"></i>
+        <i class="fa-solid fa-moon" *ngIf="box.number === 21"></i>
+        <i class="fa-solid fa-futbol" *ngIf="box.number === 22"></i>
+        <i class="fa-solid fa-rocket" *ngIf="box.number === 23"></i>
+        <i class="fa-solid fa-tree" *ngIf="box.number === 24"></i>
+        <i class="fa-solid fa-globe" *ngIf="box.number === 25"></i>
+        <i class="fa-solid fa-car" *ngIf="box.number === 26"></i>
+        <i class="fa-solid fa-heart" *ngIf="box.number === 27"></i>
+        <i class="fa-solid fa-smile" *ngIf="box.number === 28"></i>
+        <i class="fa-solid fa-graduation-cap" *ngIf="box.number === 29"></i>
+        <i class="fa-solid fa-briefcase" *ngIf="box.number === 30"></i>
+        <i class="fa-solid fa-paper-plane" *ngIf="box.number === 31"></i>
+        <i class="fa-solid fa-tv" *ngIf="box.number === 32"></i>
+        <i class="fa-solid fa-clock" *ngIf="box.number === 33"></i>
+        <i class="fa-solid fa-cloud" *ngIf="box.number === 34"></i>
+        <i class="fa-solid fa-money-bill" *ngIf="box.number === 35"></i>
+        <i class="fa-solid fa-certificate" *ngIf="box.number === 36"></i>
+        <i class="fa-solid fa-cog" *ngIf="box.number === 37"></i>
+        <i class="fa-solid fa-trophy" *ngIf="box.number === 38"></i>
+        <i class="fa-solid fa-heartbeat" *ngIf="box.number === 39"></i>
+        <i class="fa-solid fa-magnet" *ngIf="box.number === 40"></i>
+        <i class="fa-solid fa-handshake" *ngIf="box.number === 41"></i>
+        <i class="fa-solid fa-puzzle-piece" *ngIf="box.number === 42"></i>
+        <i class="fa-solid fa-star-of-life" *ngIf="box.number === 43"></i>
+        <i class="fa-solid fa-dumbbell" *ngIf="box.number === 44"></i>
+        <i class="fa-solid fa-wrench" *ngIf="box.number === 45"></i>
+        <i class="fa-solid fa-rocket" *ngIf="box.number === 46"></i>
+        <i class="fa-solid fa-graduation-cap" *ngIf="box.number === 47"></i>
+        <i class="fa-solid fa-crown" *ngIf="box.number === 48"></i>
+        <i class="fa-solid fa-bullhorn" *ngIf="box.number === 49"></i>
+        <i class="fa-solid fa-guitar" *ngIf="box.number === 50"></i>
+    </div>
+</div>
+
+
+    
+<div class="flex flex-row items-center gap-3 mb-5 text-red-600 !text-3xl mt-4">
+    <i class="fa-solid fa-heart"></i>
+    <i class="fa-solid fa-heart"></i>
+    <i class="fa-solid fa-heart"></i>
 </div>

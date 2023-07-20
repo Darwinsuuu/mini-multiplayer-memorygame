@@ -1,22 +1,11 @@
 <div class="w-full min-w-[150px]">
-    <h3 class="!font-semibold !text-lg !mb-3" [ngClass]="{ 'text-right' : group === 'left' }">{{ group === 'left' ? 'Group 1' : 'Group 2' }}</h3>
+
+    <h3 class="!font-semibold !text-lg !mb-3" [ngClass]="{ 'text-right' : group === 'left' }">{{ group === 'left' ? 'Team 1' : 'Team 2' }}</h3>
     <ul>
-        <li *ngFor="let player of players" class="list-none py-2 px-3 bg-red-600 mb-2 text-white rounded">
+        <li *ngFor="let player of players" class="list-none py-2 px-3 bg-white mb-2 text-black rounded-md">
 
             <div class="flex flex-row gap-2 items-center !text-lg" [ngClass]="{ 'justify-end': group ==='left' }">
-                
-                <!-- <ng-container *ngIf="group === 'left'">
-                    <i class="fa-solid fa-circle-check !text-green-600" *ngIf="player.trigger"></i>
-                    <i class="fa-solid fa-circle-xmark !text-red-600" *ngIf="!player.trigger"></i>
-                </ng-container> -->
-
                 <p class="!m-0" [ngClass]="{ 'text-right' : group === 'left' }">{{ player.name }}</p>
-
-                <!-- <ng-container *ngIf="group === 'right'">
-                    <i class="fa-solid fa-circle-check !text-green-600" *ngIf="player.trigger"></i>
-                    <i class="fa-solid fa-circle-xmark !text-red-600" *ngIf="!player.trigger"></i>
-                </ng-container> -->
-
             </div>
 
         </li>

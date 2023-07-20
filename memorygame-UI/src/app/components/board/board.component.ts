@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-board',
@@ -6,67 +8,50 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit {
-
   @Input() playerLength: number = 0;
   boardSize: number = 100;
   bombCount: number = 0;
-  boardValues: number[] = [];
-
+  boardValues: { number: number; trigger: boolean }[] = [];
+  private openBoxSubject = new Subject<number>();
+  private readonly DEBOUNCE_TIME_MS = 300; // Adjust the debounce time as needed
 
   ngOnInit(): void {
     this.createBoard();
+    this.openBoxSubject.pipe(debounceTime(this.DEBOUNCE_TIME_MS)).subscribe((index) => {
+      this.openBox(index);
+    });
   }
 
-  
   createBoard() {
+    const pairs = Math.floor(this.playerLength / 2 != 1 ? this.playerLength / 2 : 2);
+    const bombCounts = [0, 0, 20, 10, 8, 5];
+    this.bombCount = bombCounts[pairs] || 0;
 
-    let boxArr = [];
-    let flagCount = 1;
-    let pairCount = 1;
+    this.boardValues = Array.from({ length: this.boardSize }, (_, i) => ({
+      number: i < this.boardSize - this.bombCount ? Math.floor(i / pairs) + 1 : 0,
+      trigger: false,
+    }));
 
-    
-    if((this.playerLength / 2) === 1 || (this.playerLength / 2) === 2) { // 38 pairs
-      this.bombCount = 20;
-    } else if((this.playerLength / 2) === 3) { // 30 pairs
-      this.bombCount = 10;
-    } else if((this.playerLength / 2) === 4) { // 23 pairs
-      this.bombCount = 8;
-    } else if((this.playerLength / 2) === 5) { // 20 pairs
-      this.bombCount = 5;
-    } else {
-      this.bombCount = 0;
-    }
-
-    for (let i=0 ; i<this.boardSize ; i++) {
-      if(i < this.boardSize - this.bombCount) {
-        boxArr.push(pairCount);
-      } else {
-        boxArr.push(0)
-      }
-
-      if (flagCount == this.playerLength / 2) {
-        flagCount = 1;
-        pairCount++;
-      } else {
-        flagCount++;
-      }
-    }
-
-    this.boardValues = this.randomizeArray(boxArr);
-    // this.boardValues = boxArr;
-    console.log(boxArr)
-
+    this.randomizeArray(this.boardValues);
+    console.log(this.boardValues);
   }
 
-
-  randomizeArray(arr: number[]) {
-    // Custom sorting function to generate random order
-    const randomSort = () => Math.random() - 0.5;
-    const tempArr = arr;
-    // Use the custom sorting function to shuffle the array
-    tempArr.sort(randomSort);
-
-    return tempArr;
+  randomizeArray(arr: { number: number; trigger: boolean }[]) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
   }
 
+  openBox(index: number) {
+    this.boardValues[index].trigger = true;
+  }
+
+  openBoxDebounced(index: number) {
+    this.openBoxSubject.next(index);
+  }
+
+  trackById(index: number, item: any): any {
+    return item.id; // Assuming the items have a unique 'id' property
+  }
 }

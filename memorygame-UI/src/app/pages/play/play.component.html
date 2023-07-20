@@ -7,7 +7,7 @@
         </div>
     
         <div class="flex flex-row items-center justify-center !w-full gap-32">
-            <div class="flex flex-row items-center gap-8">
+            <div class="flex flex-row items-baseline gap-8">
                 <app-player [players]="team1"
                             group="left">
                 </app-player>
@@ -15,8 +15,7 @@
                 <app-board [playerLength]="allPlayersLength"></app-board>
             </div>
         
-            
-            <div class="flex flex-row items-center gap-4">
+            <div class="flex flex-row items-baseline gap-4">
                 <app-board [playerLength]="allPlayersLength"></app-board>
                 
                 <app-player [players]="team2"
