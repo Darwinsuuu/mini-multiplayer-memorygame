@@ -1,0 +1,27 @@
+<div class="relative pt-16 !h-full w-full bg-slate-100 z-0">
+
+    <div class="flex flex-row items-center justify-center gap-16 !h-full !w-full max-w-[1000px] m-auto">
+        <div class="w-full">
+            <h1 class="!m-0 !text-5xl !mb-4 !font-semibold">Darwin's Game</h1>
+            <p class="!m-0 !mb-5">Introducing "Darwin's Game" a mini multiplayer memory game. Match all object in real-time with friends using WebSockets. Get ready to remember and win!</p>
+
+            <button mat-raised-button color="primary" class="!px-6 !py-5 !text-lg !font-light">How to play &nbsp; <i class="fa-solid fa-circle-info text-white"></i></button>
+        </div>
+
+        <div class="w-full min-w-[250px]">
+            <h1 class="!m-0 !text-xl !mb-3 !font-medium">Player Information</h1>
+
+            <div class="flex flex-row gap-1">
+                <mat-form-field appearance="outline" class="!w-[100%]">
+                    <mat-label>Enter playername</mat-label>
+                    <input matInput type="text" maxlength="15" [(ngModel)]="playerName" class="!outline-[#3F51B5] !border-[#3F51B5]">
+                    <span matSuffix class="text-slate-600 pr-3">{{ checkPlayerName() }}</span>
+                </mat-form-field>
+            </div>
+
+            <button mat-raised-button color="primary" class="!px-6 !py-5 !text-lg !font-light !w-full mb-2 !mt-[-15px]">Join game</button>
+            <p class="!text-sm text-[#3F51B5] !mb-0 !font-medium text-right">Players: 0 / 10</p>
+        </div>
+    </div>
+
+</div>

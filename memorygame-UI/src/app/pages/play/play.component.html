@@ -1,0 +1,29 @@
+<div class="relative pt-16 !h-full w-full bg-slate-200 z-0">
+
+    <div class="py-5">
+        <div class="text-center mb-10">
+            <h3 class="!font-medium !text-md text-slate-500">Timer</h3>
+            <p class="!font-bold !text-5xl">5:00</p>
+        </div>
+    
+        <div class="flex flex-row items-center justify-center !w-full gap-32">
+            <div class="flex flex-row items-center gap-8">
+                <app-player [players]="team1"
+                            group="left">
+                </app-player>
+            
+                <app-board [playerLength]="allPlayersLength"></app-board>
+            </div>
+        
+            
+            <div class="flex flex-row items-center gap-4">
+                <app-board [playerLength]="allPlayersLength"></app-board>
+                
+                <app-player [players]="team2"
+                            group="right">
+                </app-player>
+            </div>
+        </div>
+    </div>
+    
+</div>
